@@ -13,28 +13,46 @@ const getRandomFoods =()=>{
 const initialValue = {
   food:getRandomFoods(),
   direction:'RIGHT',
-  snakeSpeed:100,
-  snakeDots:[[0,0]]
+  snakeSpeed: 300,
+  snakeDots:[[0,0]],
+  pauseGame:false,
+  highScore:0,
+  score:0
 }
 export class App extends Component {
       state = initialValue;
-
+      myInterval(val){
+        if(val == 'start'){
+          console.log("1");
+          var myInterval = setInterval(() => {this.onMoveSnake()}, this.state.snakeSpeed);
+        }
+        else if(val == 'pause'){
+          console.log("2");
+        }
+        else{
+          console.log("3");
+        }
+        
+      }  
       componentDidMount(){
-        setInterval(() => {
-          this.onMoveSnake();
-        }, this.state.snakeSpeed);
         document.onkeydown = this.onKeyDown;
+        this.myInterval('start');
       }
+
       componentDidUpdate(){
         this.checkIfOutofBorder();
         this.checkIfSnakeEatItself();
         this.checkIfEat();
+        this.myInterval();
 
       }
 
       onKeyDown = (e) =>{
         e = e || window.event;
         switch (e.keyCode) {
+          case 32:
+              this.myInterval('pause');
+            break;
           case 37:
               this.setState({direction: 'LEFT'})
             break;
@@ -105,16 +123,28 @@ export class App extends Component {
         let newSnake = [...this.state.snakeDots];
         newSnake.unshift([]);
         this.setState({
-          snakeDots:newSnake
+          snakeDots:newSnake,
+          score: this.state.snakeDots.length
         })
       }
       gameOver(){
-        alert(`game Over !!!!!! Snake length is ${this.state.snakeDots.length - 1}`);
-        this.setState(initialValue);
+        alert(`game Over !!!!!! Your Score is ${this.state.snakeDots.length - 1} !!! ${this.state.highScore < this.state.snakeDots.length - 1 ? "Congratulations Its Highscore" : ""}`);
+        this.setState({
+          highScore: this.state.highScore < this.state.snakeDots.length - 1 ? this.state.snakeDots.length - 1 : this.state.highScore,
+          food:getRandomFoods(),
+          direction:'RIGHT',
+          snakeSpeed: 300,
+          snakeDots:[[0,0]],
+          pauseGame:false,
+          score:0
+          
+        });
       }
   render() {
     return (
       <div>
+          <div className='title'>Classic Snake Game</div>
+          <div className='hScore'>High Score : {this.state.highScore} Score : {this.state.score}</div>
           <div className='gameArea'>
               <Snake snakeDots={this.state.snakeDots}/>
               <Food dot={this.state.food}/>

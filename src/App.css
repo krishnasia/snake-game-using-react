@@ -10,7 +10,7 @@
     position: absolute;
     width: 2%;
     height: 2%;
-    background-color: rgb(35, 36, 33);
+    background-color: rgb(241, 147, 69);
     border: 1px solid rgb(143, 143, 87);
     z-index: 2;
 }
@@ -18,7 +18,10 @@
     position: absolute;
     width: 2.1%;
     height: 2.1%;
-    background-color: red;
-    border: 1px sold rgb(172, 117, 117);
+    background-color: rgba(241, 142, 12, 0.897);
+    border: 1px sold rgb(233, 26, 26);
     z-index: 1;
+}
+.title{
+    align: center;    
 }
