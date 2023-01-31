@@ -23,22 +23,16 @@ export class App extends Component {
       state = initialValue;
       myInterval(val){
         if(val == 'start'){
-          console.log("1");
-          var myInterval = setInterval(() => {this.onMoveSnake()}, this.state.snakeSpeed);
-        }
-        else if(val == 'pause'){
-          console.log("2");
-        }
-        else{
-          console.log("3");
+           var myInterval = setInterval(() => {this.onMoveSnake()}, this.state.snakeSpeed);
         }
         
       }  
       componentDidMount(){
         document.onkeydown = this.onKeyDown;
+      }
+      startGame(){
         this.myInterval('start');
       }
-
       componentDidUpdate(){
         this.checkIfOutofBorder();
         this.checkIfSnakeEatItself();
@@ -145,6 +139,9 @@ export class App extends Component {
       <div>
           <div className='title'>Classic Snake Game</div>
           <div className='hScore'>High Score : {this.state.highScore} Score : {this.state.score}</div>
+          <div className='title'>
+            <button className='startBtn' onClick={this.startGame.bind(this)}>start</button>
+          </div>
           <div className='gameArea'>
               <Snake snakeDots={this.state.snakeDots}/>
               <Food dot={this.state.food}/>

@@ -1,9 +1,6 @@
 import React from "react";
 export default (props)=>{
     let length = props.snakeDots.length;
-    console.log(props);
-    console.log(props.snakeDots);
-    console.log(props.snakeDots.length);
     return(
         <div>
             {props.snakeDots &&

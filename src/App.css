@@ -3,7 +3,7 @@
     position: relative;
     margin: 50px auto;
     width: 500px;
-    height: 450px;
+    height: 400px;
     border: 10px solid green;
 }
 .snake-dot{
@@ -19,9 +19,13 @@
     width: 2.1%;
     height: 2.1%;
     background-color: rgba(241, 142, 12, 0.897);
-    border: 1px sold rgb(233, 26, 26);
+    border: 1px sold rgb(170, 7, 7);
     z-index: 1;
 }
-.title{
-    align: center;    
+.title,.hScore,.startBtn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: larger;   
+    color: green; 
 }
